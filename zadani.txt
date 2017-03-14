@@ -1,54 +1,63 @@
-Projekt 3 - Jednoduchá shluková analıza
+Projekt 3 - JednoduchÃ¡ shlukovÃ¡ analÃ½za
 
-Zadání je ve fázi návrhu.
+ZadÃ¡nÃ­ je ve fÃ¡zi nÃ¡vrhu.
 
 Popis projektu
 
-Vytvorte program, kterı implementuje jednoduchou shlukovou analızu, metodu nejvzdálenejšího souseda (angl. complete linkage).
+Vytvorte program, kterÃ½ implementuje jednoduchou shlukovou analÃ½zu, metodu nejvzdÃ¡lenejÅ¡Ã­ho souseda (angl. complete linkage).
 
-Smyslem projektu není studium shlukovıch analız. Pro projekt bude stacit následující popis (zdroj Wikipedia): Shluková analıza (té clusterová analıza, anglicky cluster analysis) je vícerozmerná statistická metoda, která se pouívá ke klasifikaci objektu. Slouí k trídení jednotek do skupin (shluku) tak, e jednotky náleící do stejné skupiny jsou si podobnejší ne objekty z ostatních skupin.
+Smyslem projektu nenÃ­ studium shlukovÃ½ch analÃ½z. Pro projekt bude stacit nÃ¡sledujÃ­cÃ­ popis (zdroj Wikipedia): ShlukovÃ¡
+analÃ½za (tÃ©Å¾ clusterovÃ¡ analÃ½za, anglicky cluster analysis) je vÃ­cerozmernÃ¡ statistickÃ¡ metoda, kterÃ¡ se pouÅ¾Ã­vÃ¡ ke
+klasifikaci objektu. SlouÅ¾Ã­ k trÃ­denÃ­ jednotek do skupin (shluku) tak, Å¾e jednotky nÃ¡leÅ¾Ã­cÃ­ do stejnÃ© skupiny jsou si
+podobnejÅ¡Ã­ neÅ¾ objekty z ostatnÃ­ch skupin.
 
-Shlukovou analızu provádejte na dvourozmernıch objektech. Kadı objekt je identifikován celım císlem. Objekty jsou uloeny v textovém souboru.
+Shlukovou analÃ½zu provÃ¡dejte na dvourozmernÃ½ch objektech. KaÅ¾dÃ½ objekt je identifikovÃ¡n celÃ½m cÃ­slem. Objekty jsou uloÅ¾eny 
+v textovÃ©m souboru.
 
-Pri implementaci muete pro vizualizaci a porozumení objektu pouívat tuto jednoduchou aplikaci, která vykresluje a obarvuje shluky. Reference s popisem metody zde.
+Pri implementaci muÅ¾ete pro vizualizaci a porozumenÃ­ objektu pouÅ¾Ã­vat tuto jednoduchou aplikaci, kterÃ¡ vykresluje 
+a obarvuje shluky. Reference s popisem metody zde.
 
-Detailní specifikace
+DetailnÃ­ specifikace
 
-Preklad a odevzdání zdrojového souboru
+Preklad a odevzdÃ¡nÃ­ zdrojovÃ©ho souboru
 
-Odevzdání: Program implementujte ve zdrojovém souboru proj3.c. Zdrojovı soubor odevzdejte prostrednictvím informacního systému.
+OdevzdÃ¡nÃ­: Program implementujte ve zdrojovÃ©m souboru proj3.c. ZdrojovÃ½ soubor odevzdejte prostrednictvÃ­m informacnÃ­ho
+systÃ©mu.
 
-Preklad: Program bude prekládán s následujícími argumenty
+Preklad: Program bude preklÃ¡dÃ¡n s nÃ¡sledujÃ­cÃ­mi argumenty
 
 $ gcc -std=c99 -Wall -Wextra -Werror -DNDEBUG proj3.c -o proj3 -lm
-Definice makra NDEBUG (argument -DNDEBUG) je z duvodu anulování efektu ladicích informací.
-Propojení s matematickou knihovnou (argument -lm) je z duvodu vıpoctu vzdálenosti objektu.
-Syntax spuštení
+Definice makra NDEBUG (argument -DNDEBUG) je z duvodu anulovÃ¡nÃ­ efektu ladicÃ­ch informacÃ­.
+PropojenÃ­ s matematickou knihovnou (argument -lm) je z duvodu vÃ½poctu vzdÃ¡lenosti objektu.
+Syntax spuÅ¡tenÃ­
 
-Program se spouští v následující podobe:
+Program se spouÅ¡tÃ­ v nÃ¡sledujÃ­cÃ­ podobe:
 
 ./proj3 SOUBOR [N]
 Argumenty programu:
 
-SOUBOR je jméno souboru se vstupními daty.
-N je volitelnı argument definující cílovı pocet shluku. N > 0. Vıchocí hodnota (pri absenci argumentu) je 1.
-Implementacní detaily
+SOUBOR je jmÃ©no souboru se vstupnÃ­mi daty.
+N je volitelnÃ½ argument definujÃ­cÃ­ cÃ­lovÃ½ pocet shluku. N > 0. VÃ½chocÃ­ hodnota (pri absenci argumentu) je 1.
+ImplementacnÃ­ detaily
 
-Formát vstupního souboru
+FormÃ¡t vstupnÃ­ho souboru
 
-Vstupní data jsou uloena v textovém souboru. První rádek souboru je vyhrazen pro pocet objektu v souboru a má formát:
+VstupnÃ­ data jsou uloÅ¾ena v textovÃ©m souboru. PrvnÃ­ rÃ¡dek souboru je vyhrazen pro pocet objektu v souboru a mÃ¡ formÃ¡t:
 
 count=N
-kde císlo je pocet objektu v souboru. Následuje na kadém rádku definice jednoho objektu. Pocet rádku souboru odpovídá minimálne poctu objektu + 1 (první rádek). Další rádky souboru ignorujte. Rádek definující objekt je formátu:
+kde cÃ­slo je pocet objektu v souboru. NÃ¡sleduje na kaÅ¾dÃ©m rÃ¡dku definice jednoho objektu. Pocet rÃ¡dku souboru odpovÃ­dÃ¡
+minimÃ¡lne poctu objektu + 1 (prvnÃ­ rÃ¡dek). DalÅ¡Ã­ rÃ¡dky souboru ignorujte. RÃ¡dek definujÃ­cÃ­ objekt je formÃ¡tu:
 OBJID X Y
-kde OBJID je v rámci souboru jednoznacnı celocíselnı identifikátor, X a Y jsou souradnice objektu také celá císla. Platí 0 <= X <= 1000, 0 <= Y <= 1000.
-1. podúkol
+kde OBJID je v rÃ¡mci souboru jednoznacnÃ½ celocÃ­selnÃ½ identifikÃ¡tor, X a Y jsou souradnice objektu takÃ© celÃ¡ cÃ­sla. 
+PlatÃ­ 0 <= X <= 1000, 0 <= Y <= 1000.
+1. podÃºkol
 
-Stáhnete si kostru programu proj3.c. Seznamte se s datovımi typy a funkcemi. Vaším úkolem je pouze doplnit kód na místech oznacenıch komentárem TODO.
+StÃ¡hnete si kostru programu proj3.c. Seznamte se s datovÃ½mi typy a funkcemi. VaÅ¡Ã­m Ãºkolem je pouze doplnit kÃ³d 
+na mÃ­stech oznacenÃ½ch komentÃ¡rem TODO.
 
-2. podúkol
+2. podÃºkol
 
-Nacítání vstupního souboru a následnı vıpis:
+NacÃ­tÃ¡nÃ­ vstupnÃ­ho souboru a nÃ¡slednÃ½ vÃ½pis:
 
 1. Implementujte funkce:
 
@@ -56,17 +65,19 @@ void init_cluster(struct cluster_t *c, int cap);
 void clear_cluster(struct cluster_t *c);
 void append_cluster(struct cluster_t *c, struct obj_t obj);
 int load_clusters(char *filename, struct cluster_t **arr);
-Funkce init_cluster slouí pro inicializaci shluku (alokaci poadovaného místa).
+Funkce init_cluster slouÅ¾Ã­ pro inicializaci shluku (alokaci poÅ¾adovanÃ©ho mÃ­sta).
 
-Funkce clear_cluster slouí pro odstranení všech objektu ve shluku (dealokaci místa) a reinicializaci shluku s kapacitou 0.
+Funkce clear_cluster slouÅ¾Ã­ pro odstranenÃ­ vÅ¡ech objektu ve shluku (dealokaci mÃ­sta) a reinicializaci shluku s kapacitou 0.
 
-Funkce append_cluster slouí pro pridání objektu na konec shluku.
+Funkce append_cluster slouÅ¾Ã­ pro pridÃ¡nÃ­ objektu na konec shluku.
 
-Funkce load_clusters nacítá ze vstupního souboru všechny objekty a ukládá je kadı do jednoho shluku. Shluky budou uloeny v poli. Místo pro pole shluku musí funkce alokovat.
+Funkce load_clusters nacÃ­tÃ¡ ze vstupnÃ­ho souboru vÅ¡echny objekty a uklÃ¡dÃ¡ je kaÅ¾dÃ½ do jednoho shluku. Shluky budou uloÅ¾eny 
+v poli. MÃ­sto pro pole shluku musÃ­ funkce alokovat.
 
-2. Overte funkcionalitu na nactení vstupního souboru (pomocí vámi implementované funkce load_clusters) a následném vıpisu (pomocí funkce print_clusters):
+2. Overte funkcionalitu na nactenÃ­ vstupnÃ­ho souboru (pomocÃ­ vÃ¡mi implementovanÃ© funkce load_clusters) a nÃ¡slednÃ©m vÃ½pisu
+(pomocÃ­ funkce print_clusters):
 
-Vstupní soubor objekty
+VstupnÃ­ soubor objekty
 
 count=20
 40 86 663
@@ -89,7 +100,7 @@ count=20
 87 149 304
 89 749 190
 93 944 835
-Nactení vstupního souboru a následné vypsání shluku:
+NactenÃ­ vstupnÃ­ho souboru a nÃ¡slednÃ© vypsÃ¡nÃ­ shluku:
 
 $ ./proj3 objekty 20
 Clusters:
@@ -113,11 +124,11 @@ cluster 16: 86[238,650]
 cluster 17: 87[149,304]
 cluster 18: 89[749,190]
 cluster 19: 93[944,835]
-3. podúkol
+3. podÃºkol
 
-Implementujte všechny ostatní funkce v kostre souboru proj3.c oznacené komentárem TODO. Vıslednı program odevzdejte.
+Implementujte vÅ¡echny ostatnÃ­ funkce v kostre souboru proj3.c oznacenÃ© komentÃ¡rem TODO. VÃ½slednÃ½ program odevzdejte.
 
-Príklady vstupu a vıstupu
+PrÃ­klady vstupu a vÃ½stupu
 
 $ cat objekty
 count=20
@@ -185,12 +196,12 @@ cluster 18: 93[944,835]
 ==8142== 
 ==8142== For counts of detected and suppressed errors, rerun with: -v
 ==8142== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-Hodnocení
+HodnocenÃ­
 
-Na vısledném hodnocení mají hlavní vliv následující faktory:
+Na vÃ½slednÃ©m hodnocenÃ­ majÃ­ hlavnÃ­ vliv nÃ¡sledujÃ­cÃ­ faktory:
 
-presné dodrení implementacních detailu,
-implementace jednotlivıch funkcí,
-správná práce s pametí,
-správnı algoritmus shlukování,
-správné rešení neocekávanıch stavu.
+presnÃ© dodrÅ¾enÃ­ implementacnÃ­ch detailu,
+implementace jednotlivÃ½ch funkcÃ­,
+sprÃ¡vnÃ¡ prÃ¡ce s pametÃ­,
+sprÃ¡vnÃ½ algoritmus shlukovÃ¡nÃ­,
+sprÃ¡vnÃ© reÅ¡enÃ­ neocekÃ¡vanÃ½ch stavu.
